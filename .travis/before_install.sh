@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-#    Copyright 2018 Google LLC All Rights Reserved.
+#    Copyright 2018-2019 Google LLC All Rights Reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
 #    you may not use this file except in compliance with the License.
@@ -28,6 +28,48 @@ die()
     exit 1
 }
 
+#
+# installdeps <dependency tag>
+#
+# Abstraction for handling common dependency fulfillment across
+# different, but related, test targets.
+#
+installdeps()
+{
+    case "${1}" in
+
+        bluez-deps)
+            sudo apt-get update
+            sudo apt-get -y install libdbus-1-dev libudev-dev libical-dev systemd
+            sudo apt-get -y install libusb-dev libglib2.0-dev libreadline-dev libdbus-glib-1-dev libtool
+            sudo pip install dbus-python==1.2.4
+
+            ;;
+
+        happy-deps)
+            sudo apt-get update
+            sudo apt-get -y install bridge-utils
+            sudo apt-get -y install lcov
+            sudo apt-get -y install python-lockfile
+            sudo apt-get -y install python-psutil
+            sudo apt-get -y install python-setuptools
+            sudo apt-get -y install swig
+
+            ;;
+
+        openssl-deps)
+            # OpenWeave Core may use OpenSSL for cryptography. The
+            # OpenSSL version included in package depends on the
+            # perl Text::Template mmodule.
+
+            curl -L https://cpanmin.us | sudo perl - --sudo App::cpanminus
+            sudo cpanm "Text::Template"
+
+            ;;
+
+    esac
+}
+
 # Package build machine OS-specific configuration and setup
 
 case "${TRAVIS_OS_NAME}" in
@@ -47,28 +89,6 @@ esac
 
 case "${BUILD_TARGET}" in
 
-    linux-auto-*|linux-lwip-*)
-        # By default, the BLE layer is enabled in OpenWeave Core and, by
-        # default on Linux, the BLE layer is implemented by BlueZ. On Linux,
-        # BlueZ requires:
-        #
-        #   * libdbus-1-dev
-        #   * libical-dev
-        #   * libudev-dev
-        #   * systemd
-
-        sudo apt-get update
-        sudo apt-get install libdbus-1-dev libudev-dev libical-dev systemd
-
-        # By default, OpenWeave Core uses OpenSSL for cryptography on
-        # Linux and the OpenSSL version included in package depends
-        # on the perl Text::Template mmodule.
-
-        curl -L https://cpanmin.us | sudo perl - --sudo App::cpanminus
-        sudo cpanm "Text::Template"
-
-        ;;
-
     esp32)
         .travis/prepare_esp32.sh
 
@@ -78,31 +98,44 @@ case "${BUILD_TARGET}" in
         # By default, OpenWeave Core uses OpenSSL for cryptography on
         # OS X and the OpenSSL version included in package depends
         # on the perl Text::Template mmodule.
-
-        curl -L https://cpanmin.us | sudo perl - --sudo App::cpanminus
-        sudo cpanm "Text::Template"
+        
+        installdeps "openssl-deps"
 
         ;;
 
-    happy_test)
-        # prepare for happy test run
-        sudo apt-get update
-        sudo apt-get install python-setuptools
-        sudo apt-get install bridge-utils
-        sudo apt-get install swig
-        sudo apt-get install lcov
+    linux-auto-gcc-check-happy|linux-lwip-gcc-check-happy)
+        # By default, the BLE layer is enabled in OpenWeave Core and,
+        # by default on Linux, the BLE layer is implemented by
+        # BlueZ. Satisfy its dependencies.
+
+        installdeps "bluez-deps"
+
+        # By default, OpenWeave Core uses OpenSSL for cryptography on
+        # Linux and the OpenSSL version included in package depends
+        # on the perl Text::Template mmodule.
+
+        installdeps "openssl-deps"
+
+        installdeps "happy-deps"
 
         cd $HOME
         git clone https://github.com/openweave/happy.git
-
-        mkdir -p ve
-        cd ve
-        virtualenv happy
-        ls ./happy/bin/activate
-        . ./happy/bin/activate
         cd ${HOME}/happy
+        make install
         python pip_packages.py
-        python setup.py develop
+        pip install pexpect
+        sudo apt install python-gobject
+        sudo apt install python-dbus
+
+        # build bluez
+        cd $TRAVIS_BUILD_DIR
+        wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.48.tar.gz
+        tar xfz $TRAVIS_BUILD_DIR/bluez-5.48.tar.gz
+        cd $TRAVIS_BUILD_DIR/bluez-5.48/
+        ./configure  --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --enable-tools --enable-testing --enable-experimental --with-systemdsystemunitdir=/lib/systemd/system --with-systemduserunitdir=/usr/lib/systemd --enable-deprecated
+        make
+        sudo make install
+        cd $TRAVIS_BUILD_DIR
 
         # configure happy, $HOME: /home/travis
         # $TRAVIS_BUILD_DIR: /home/travis/build/jenniexie/openweave-core
@@ -114,8 +147,25 @@ case "${BUILD_TARGET}" in
 EOF
 
         sudo ln -s ${HOME}/.happy_conf.json /root/.happy_conf.json
-    ;;
+        ;;
+
+    linux-auto-*|linux-lwip-*)
+        # By default, the BLE layer is enabled in OpenWeave Core and,
+        # by default on Linux, the BLE layer is implemented by
+        # BlueZ. Satisfy its dependencies.
+
+        installdeps "bluez-deps"
+
+        # By default, OpenWeave Core uses OpenSSL for cryptography on
+        # Linux and the OpenSSL version included in package depends
+        # on the perl Text::Template mmodule.
+
+        installdeps "openssl-deps"
+
+        ;;
+
     *)
         die "Unknown build target \"${BUILD_TARGET}\"."
+
         ;;
 esac

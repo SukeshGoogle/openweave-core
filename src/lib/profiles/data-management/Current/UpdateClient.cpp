@@ -135,7 +135,8 @@ WEAVE_ERROR UpdateClient::SendUpdate(bool aIsPartialUpdate, PacketBuffer *aBuf, 
 
 #if WEAVE_CONFIG_DATA_MANAGEMENT_ENABLE_SCHEMA_CHECK
     reader.Init(aBuf);
-    reader.Next();
+    err = reader.Next();
+    VerifyOrExit(err == WEAVE_NO_ERROR, WeaveLogDetail(DataManagement, "Created malformed update, err: %" PRId32, err));
     parser.Init(reader);
     parser.CheckSchemaValidity();
 #endif //WEAVE_CONFIG_DATA_MANAGEMENT_ENABLE_SCHEMA_CHECK
@@ -149,6 +150,14 @@ WEAVE_ERROR UpdateClient::SendUpdate(bool aIsPartialUpdate, PacketBuffer *aBuf, 
     WEAVE_FAULT_INJECT(FaultInjection::kFault_WDM_UpdateRequestSendErrorInline,
             nl::Inet::FaultInjection::GetManager().FailAtFault(
                 nl::Inet::FaultInjection::kFault_Send,
+                0, 1));
+
+    // Use DropOutgoingMsg fault to fail the current outgoing message.
+    // If WRM is being used, the transmission would be retried after a
+    // retransmission timeout delay.
+    WEAVE_FAULT_INJECT(FaultInjection::kFault_WDM_UpdateRequestDropMessage,
+            nl::Inet::FaultInjection::GetManager().FailAtFault(
+                nl::Weave::FaultInjection::kFault_DropOutgoingUDPMsg,
                 0, 1));
 
     // Use WRM's SendError fault to fail asynchronously

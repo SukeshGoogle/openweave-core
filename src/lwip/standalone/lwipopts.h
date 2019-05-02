@@ -1,5 +1,6 @@
 /*
  *
+ *    Copyright (c) 2019 Google LLC.
  *    Copyright (c) 2014-2018 Nest Labs, Inc.
  *    All rights reserved.
  *
@@ -18,8 +19,8 @@
 
 /**
  *    @file
- *      This file describes compile-time constants used for
- *      configuring LwIP.
+ *      This file describes compile-time constants for configuring LwIP
+ *      for use in standalone (desktop) environments.
  *
  */
 
@@ -344,8 +345,18 @@
  * LWIP_IPV6_MLD==1: Enable multicast listener discovery protocol.
  */
 #ifndef LWIP_IPV6_MLD
-#define LWIP_IPV6_MLD                   0
+#define LWIP_IPV6_MLD                   1
 #endif
+
+/**
+ * MEMP_NUM_MLD6_GROUP: Maximum number of IPv6 multicast groups that
+ * can be joined. Allocate one (1) for the link local address
+ * solicited node multicast group, one (1) for the any/unspecified
+ * address solicited node multicast group (which seems to be used
+ * for/by DAD in this epoch of LwIP), and another four (4) for
+ * application groups.
+ */
+#define MEMP_NUM_MLD6_GROUP             ((1 + 1) + 4)
 
 /**
  * LWIP_IPV6_FORWARD==1: Enable IPv6 forwarding.

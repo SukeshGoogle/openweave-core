@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 #
+#    Copyright (c) 2018-2019 Google LLC
 #    Copyright (c) 2014-2018 Nest Labs, Inc.
-#    Copyright (c) 2018 Google LLC
 #    All rights reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -87,6 +87,15 @@ AC_CONFIG_MACRO_DIRS([build/autoconf/m4 third_party/nlbuild-autotools/repo/third
 # defines.
 #
 AC_CONFIG_HEADERS([src/include/BuildConfig.h])
+
+#
+# Guards against multiple inclusion of the BuildConfig.h
+#
+
+AH_TOP([#ifndef WEAVE_BUILD_CONFIG_H
+#define WEAVE_BUILD_CONFIG_H])
+
+AH_BOTTOM([#endif // WEAVE_BUILD_CONFIG_H])
 
 #
 # Figure out what the canonical build, host and target tuples are.
@@ -908,7 +917,7 @@ CONFIG_TARGET_SUITES=all
 AC_MSG_CHECKING([checking which test suite is running while running Happy service tests])
 AC_ARG_WITH(happy-test-suite,
     [AS_HELP_STRING([--with-happy-test-suite=SUITE],
-        [Specify the target test suite from one or more of, separated by commas: minimal, all, wdm, echo, tunnel, time, pairing, bdx, key_export, core, secmgr, servicedir, perf@<:@default=all@:>@.])],
+        [Specify the target test suite from one or more of, separated by commas: minimal, all, wdm, echo, tunnel, time, pairing, bdx, key_export, core, inet, secmgr, servicedir, perf@<:@default=all@:>@.])],
     [
         CONFIG_TARGET_SUITES=`echo ${with_happy_test_suite} | sed -e 's/,/ /g'`
         for target_suite in ${CONFIG_TARGET_SUITES}; do
@@ -926,7 +935,7 @@ AC_ARG_WITH(happy-test-suite,
                 fi
                 ;;
 
-            yes | no | minimal | all | wdm | echo | tunnel | time | pairing | servicedir)
+            yes | no | minimal | all | inet | wdm | echo | tunnel | time | pairing | servicedir)
                 ;;
 
             *)
@@ -957,6 +966,7 @@ for target_suite in ${CONFIG_TARGET_SUITES}; do
         HAPPY_TEST_USE_KEY_EXPORT=1
         HAPPY_TEST_USE_BDX=1
         HAPPY_TEST_USE_CORE=1
+        HAPPY_TEST_USE_INET=1
         HAPPY_TEST_USE_SECMGR=1
         HAPPY_TEST_USE_SERVICEDIR=1
         ;;
@@ -997,6 +1007,10 @@ for target_suite in ${CONFIG_TARGET_SUITES}; do
         HAPPY_TEST_USE_CORE=1
         ;;
 
+    inet)
+        HAPPY_TEST_USE_INET=1
+        ;;
+
     secmgr)
         HAPPY_TEST_USE_SECMGR=1
         ;;
@@ -1016,6 +1030,7 @@ AM_CONDITIONAL([WEAVE_RUN_HAPPY_TUNNEL], [test "${HAPPY_TEST_USE_TUNNEL}" = 1])
 AM_CONDITIONAL([WEAVE_RUN_HAPPY_TIME], [test "${HAPPY_TEST_USE_TIME}" = 1])
 AM_CONDITIONAL([WEAVE_RUN_HAPPY_KEY_EXPORT], [test "${HAPPY_TEST_USE_KEY_EXPORT}" = 1])
 AM_CONDITIONAL([WEAVE_RUN_HAPPY_CORE], [test "${HAPPY_TEST_USE_CORE}" = 1])
+AM_CONDITIONAL([WEAVE_RUN_HAPPY_INET], [test "${HAPPY_TEST_USE_INET}" = 1])
 AM_CONDITIONAL([WEAVE_RUN_HAPPY_BDX], [test "${HAPPY_TEST_USE_BDX}" = 1])
 AM_CONDITIONAL([WEAVE_RUN_HAPPY_SECMGR], [test "${HAPPY_TEST_USE_SECMGR}" = 1])
 AM_CONDITIONAL([WEAVE_RUN_HAPPY_SERVICEDIR], [test "${HAPPY_TEST_USE_SERVICEDIR}" = 1])
@@ -1810,29 +1825,29 @@ AC_LANG_PUSH([C++])
 
 # SystemLayer
 
-NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-system-project-includes, SystemProjectConfig.h, Weave SystemLayer, ${ac_abs_confdir}/build/config/standalone)
+NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-system-project-includes, SYSTEM_PROJECT_CONFIG_INCLUDE, SystemProjectConfig.h, Weave System Layer, ${ac_abs_confdir}/build/config/standalone)
 
 # BleLayer
 
 if test ${CONFIG_NETWORK_LAYER_BLE} = 1; then
-    NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-ble-project-includes, BleProjectConfig.h, Weave BleLayer, ${ac_abs_confdir}/build/config/standalone)
+    NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-ble-project-includes, BLE_PROJECT_CONFIG_INCLUDE, BleProjectConfig.h, Weave BLE Layer, ${ac_abs_confdir}/build/config/standalone)
 fi
 
 # InetLayer
 
 if test ${CONFIG_NETWORK_LAYER_INET} = 1; then
-    NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-inet-project-includes, InetProjectConfig.h, Weave InetLayer, ${ac_abs_confdir}/build/config/standalone)
+    NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-inet-project-includes, INET_PROJECT_CONFIG_INCLUDE, InetProjectConfig.h, Weave Inet Layer, ${ac_abs_confdir}/build/config/standalone)
 fi
 
 # Warm
 
 if test "${build_warm}" = "yes"; then
-    NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-warm-project-includes, WarmProjectConfig.h, Weave Warm, ${ac_abs_confdir}/build/config/standalone)
+    NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-warm-project-includes, WARM_PROJECT_CONFIG_INCLUDE, WarmProjectConfig.h, WARM, ${ac_abs_confdir}/build/config/standalone)
 fi
 
 # Core
 
-NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-project-includes, WeaveProjectConfig.h, Weave Core, ${ac_abs_confdir}/build/config/standalone)
+NL_CHECK_PROJECT_CONFIG_INCLUDES(weave-project-includes, WEAVE_PROJECT_CONFIG_INCLUDE, WeaveProjectConfig.h, Weave Core, ${ac_abs_confdir}/build/config/standalone)
 
 AC_LANG_POP([C++])
 
@@ -2065,16 +2080,8 @@ fi
 #
 # LwIP
 #
-# This should only be checked if explicitly requested.
-#
 
-if test "${WEAVE_SYSTEM_CONFIG_USE_LWIP}" = 1; then
-
-    NL_WITH_LWIP
-
-fi
-
-AM_CONDITIONAL([WEAVE_WITH_LWIP_INTERNAL], [test "${nl_with_lwip}" = "internal"])
+NL_WITH_LWIP(${WEAVE_SYSTEM_CONFIG_USE_LWIP})
 
 #
 # Nlio

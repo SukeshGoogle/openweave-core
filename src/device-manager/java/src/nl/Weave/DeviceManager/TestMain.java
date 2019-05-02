@@ -1,6 +1,7 @@
 /*
 
-    Copyright (c) 013-2017 Nest Labs, Inc.
+    Copyright (c) 2019 Google LLC
+    Copyright (c) 2013-2017 Nest Labs, Inc.
     All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -178,7 +179,9 @@ public class TestMain implements WeaveDeviceManager.CompletionHandler
         System.out.println("    Adding new Thread network...");
         networkInfo = NetworkInfo.MakeThread("Thread-Test",
                                         DatatypeConverter.parseHexBinary("0102030405060708"),
-                                        "akey".getBytes());
+                                        "akey".getBytes(),
+                                        0x1234,
+                                        (byte)21);
         DeviceMgr.beginAddNetwork(networkInfo);
         ExpectSuccess("AddNetwork");
         System.out.println("AddNetwork Test Succeeded");
@@ -187,7 +190,7 @@ public class TestMain implements WeaveDeviceManager.CompletionHandler
         System.out.println("GetNetworks Test");
         System.out.println("    Getting configured networks...");
         ExpectedNetworkCount = 2;
-        DeviceMgr.beginGetNetworks(GetNetworkFlags.IncludeCredentials);
+        DeviceMgr.beginGetNetworks(GetNetworkFlags.None);
         ExpectSuccess("GetNetworks");
         System.out.println("GetNetworks Test Succeeded");
 
@@ -202,16 +205,14 @@ public class TestMain implements WeaveDeviceManager.CompletionHandler
         System.out.println("GetNetworks Test");
         System.out.println("    Getting configured networks...");
         ExpectedNetworkCount = 1;
-        DeviceMgr.beginGetNetworks(GetNetworkFlags.IncludeCredentials);
+        DeviceMgr.beginGetNetworks(GetNetworkFlags.None);
         ExpectSuccess("GetNetworks");
         System.out.println("GetNetworks Test Succeeded");
 
         TestResult = null;
         System.out.println("GetCameraAuthData Test");
         System.out.println("    Getting camera auth data...");
-        String ExpectedCameraMACAddress = "112233445566";
-        String ExpectedCameraSignedPayload = "Ceci n'est pas un hash.";
-        DeviceMgr.beginGetCameraAuthData("Ceci n'est pas un nonce.");
+        DeviceMgr.beginGetCameraAuthData("Ceci n'est pas un nonce.012345670123456789ABCDEF0123456789ABCDEF");
         ExpectSuccess("GetCameraAuthData");
         System.out.println("GetCameraAuthData Test Succeeded");
 

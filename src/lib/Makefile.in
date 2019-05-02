@@ -424,7 +424,9 @@ am__libWeave_a_SOURCES_DIST =  \
 	@top_builddir@/src/inet/EndPointBasis.cpp \
 	@top_builddir@/src/inet/IPAddress-StringFuncts.cpp \
 	@top_builddir@/src/inet/IPAddress.cpp \
+	@top_builddir@/src/inet/IPEndPointBasis.cpp \
 	@top_builddir@/src/inet/IPPrefix.cpp \
+	@top_builddir@/src/inet/InetError.cpp \
 	@top_builddir@/src/inet/InetInterface.cpp \
 	@top_builddir@/src/inet/InetLayer.cpp \
 	@top_builddir@/src/inet/InetLayerBasis.cpp \
@@ -441,6 +443,7 @@ am__libWeave_a_SOURCES_DIST =  \
 	@top_builddir@/src/ble/BLEEndPoint.cpp \
 	@top_builddir@/src/ble/WoBle.cpp \
 	@top_builddir@/src/ble/BleUUID.cpp \
+	@top_builddir@/src/ble/BleError.cpp \
 	@top_builddir@/src/device-manager/WoBleTest.cpp \
 	@top_builddir@/src/lib/core/ExchangeContext.cpp \
 	@top_builddir@/src/lib/core/HostPortList.cpp \
@@ -448,6 +451,7 @@ am__libWeave_a_SOURCES_DIST =  \
 	@top_builddir@/src/lib/core/WeaveConnection.cpp \
 	@top_builddir@/src/lib/core/WeaveConnectionTunnel.cpp \
 	@top_builddir@/src/lib/core/WeaveExchangeMgr.cpp \
+	@top_builddir@/src/lib/core/WeaveError.cpp \
 	@top_builddir@/src/lib/core/WeaveFabricState.cpp \
 	@top_builddir@/src/lib/core/WeaveGlobals.cpp \
 	@top_builddir@/src/lib/core/WeaveKeyIds.cpp \
@@ -464,6 +468,7 @@ am__libWeave_a_SOURCES_DIST =  \
 	@top_builddir@/src/lib/core/WeaveCircularTLVBuffer.cpp \
 	@top_builddir@/src/lib/core/WeaveStats.cpp \
 	@top_builddir@/src/lib/support/ASN1OID.cpp \
+	@top_builddir@/src/lib/support/ASN1Error.cpp \
 	@top_builddir@/src/lib/support/ASN1Reader.cpp \
 	@top_builddir@/src/lib/support/ASN1Writer.cpp \
 	@top_builddir@/src/lib/support/Base64.cpp \
@@ -616,7 +621,9 @@ am__objects_10 =  \
 	@top_builddir@/src/inet/libWeave_a-EndPointBasis.$(OBJEXT) \
 	@top_builddir@/src/inet/libWeave_a-IPAddress-StringFuncts.$(OBJEXT) \
 	@top_builddir@/src/inet/libWeave_a-IPAddress.$(OBJEXT) \
+	@top_builddir@/src/inet/libWeave_a-IPEndPointBasis.$(OBJEXT) \
 	@top_builddir@/src/inet/libWeave_a-IPPrefix.$(OBJEXT) \
+	@top_builddir@/src/inet/libWeave_a-InetError.$(OBJEXT) \
 	@top_builddir@/src/inet/libWeave_a-InetInterface.$(OBJEXT) \
 	@top_builddir@/src/inet/libWeave_a-InetLayer.$(OBJEXT) \
 	@top_builddir@/src/inet/libWeave_a-InetLayerBasis.$(OBJEXT) \
@@ -630,6 +637,7 @@ am__objects_12 = @top_builddir@/src/ble/libWeave_a-BleLayer.$(OBJEXT) \
 	@top_builddir@/src/ble/libWeave_a-BLEEndPoint.$(OBJEXT) \
 	@top_builddir@/src/ble/libWeave_a-WoBle.$(OBJEXT) \
 	@top_builddir@/src/ble/libWeave_a-BleUUID.$(OBJEXT) \
+	@top_builddir@/src/ble/libWeave_a-BleError.$(OBJEXT) \
 	$(am__objects_11)
 @CONFIG_NETWORK_LAYER_BLE_TRUE@am__objects_13 = $(am__objects_12)
 am__objects_14 = @top_builddir@/src/lib/core/libWeave_a-ExchangeContext.$(OBJEXT) \
@@ -638,6 +646,7 @@ am__objects_14 = @top_builddir@/src/lib/core/libWeave_a-ExchangeContext.$(OBJEXT
 	@top_builddir@/src/lib/core/libWeave_a-WeaveConnection.$(OBJEXT) \
 	@top_builddir@/src/lib/core/libWeave_a-WeaveConnectionTunnel.$(OBJEXT) \
 	@top_builddir@/src/lib/core/libWeave_a-WeaveExchangeMgr.$(OBJEXT) \
+	@top_builddir@/src/lib/core/libWeave_a-WeaveError.$(OBJEXT) \
 	@top_builddir@/src/lib/core/libWeave_a-WeaveFabricState.$(OBJEXT) \
 	@top_builddir@/src/lib/core/libWeave_a-WeaveGlobals.$(OBJEXT) \
 	@top_builddir@/src/lib/core/libWeave_a-WeaveKeyIds.$(OBJEXT) \
@@ -664,6 +673,7 @@ am__objects_14 = @top_builddir@/src/lib/core/libWeave_a-ExchangeContext.$(OBJEXT
 @WEAVE_WITH_NLFAULTINJECTION_TRUE@am__objects_16 = @top_builddir@/src/lib/support/libWeave_a-WeaveFaultInjection.$(OBJEXT)
 am__objects_17 =  \
 	@top_builddir@/src/lib/support/libWeave_a-ASN1OID.$(OBJEXT) \
+	@top_builddir@/src/lib/support/libWeave_a-ASN1Error.$(OBJEXT) \
 	@top_builddir@/src/lib/support/libWeave_a-ASN1Reader.$(OBJEXT) \
 	@top_builddir@/src/lib/support/libWeave_a-ASN1Writer.$(OBJEXT) \
 	@top_builddir@/src/lib/support/libWeave_a-Base64.$(OBJEXT) \
@@ -1117,7 +1127,9 @@ nl_SystemLayer_sources = @top_builddir@/src/system/SystemClock.cpp \
 nl_InetLayer_sources = @top_builddir@/src/inet/EndPointBasis.cpp \
 	@top_builddir@/src/inet/IPAddress-StringFuncts.cpp \
 	@top_builddir@/src/inet/IPAddress.cpp \
+	@top_builddir@/src/inet/IPEndPointBasis.cpp \
 	@top_builddir@/src/inet/IPPrefix.cpp \
+	@top_builddir@/src/inet/InetError.cpp \
 	@top_builddir@/src/inet/InetInterface.cpp \
 	@top_builddir@/src/inet/InetLayer.cpp \
 	@top_builddir@/src/inet/InetLayerBasis.cpp \
@@ -1140,7 +1152,8 @@ nl_InetLayer_sources = @top_builddir@/src/inet/EndPointBasis.cpp \
 nl_BleLayer_sources = @top_builddir@/src/ble/BleLayer.cpp \
 	@top_builddir@/src/ble/BLEEndPoint.cpp \
 	@top_builddir@/src/ble/WoBle.cpp \
-	@top_builddir@/src/ble/BleUUID.cpp $(NULL) $(am__append_9)
+	@top_builddir@/src/ble/BleUUID.cpp \
+	@top_builddir@/src/ble/BleError.cpp $(NULL) $(am__append_9)
 nl_WeaveCore_sources = \
     @top_builddir@/src/lib/core/ExchangeContext.cpp         \
     @top_builddir@/src/lib/core/HostPortList.cpp            \
@@ -1148,6 +1161,7 @@ nl_WeaveCore_sources = \
     @top_builddir@/src/lib/core/WeaveConnection.cpp         \
     @top_builddir@/src/lib/core/WeaveConnectionTunnel.cpp   \
     @top_builddir@/src/lib/core/WeaveExchangeMgr.cpp        \
+    @top_builddir@/src/lib/core/WeaveError.cpp              \
     @top_builddir@/src/lib/core/WeaveFabricState.cpp        \
     @top_builddir@/src/lib/core/WeaveGlobals.cpp            \
     @top_builddir@/src/lib/core/WeaveKeyIds.cpp             \
@@ -1166,6 +1180,7 @@ nl_WeaveCore_sources = \
     $(NULL)
 
 nl_WeaveSupport_sources = @top_builddir@/src/lib/support/ASN1OID.cpp \
+	@top_builddir@/src/lib/support/ASN1Error.cpp \
 	@top_builddir@/src/lib/support/ASN1Reader.cpp \
 	@top_builddir@/src/lib/support/ASN1Writer.cpp \
 	@top_builddir@/src/lib/support/Base64.cpp \
@@ -1448,7 +1463,13 @@ clean-libLIBRARIES:
 @top_builddir@/src/inet/libWeave_a-IPAddress.$(OBJEXT):  \
 	@top_builddir@/src/inet/$(am__dirstamp) \
 	@top_builddir@/src/inet/$(DEPDIR)/$(am__dirstamp)
+@top_builddir@/src/inet/libWeave_a-IPEndPointBasis.$(OBJEXT):  \
+	@top_builddir@/src/inet/$(am__dirstamp) \
+	@top_builddir@/src/inet/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/inet/libWeave_a-IPPrefix.$(OBJEXT):  \
+	@top_builddir@/src/inet/$(am__dirstamp) \
+	@top_builddir@/src/inet/$(DEPDIR)/$(am__dirstamp)
+@top_builddir@/src/inet/libWeave_a-InetError.$(OBJEXT):  \
 	@top_builddir@/src/inet/$(am__dirstamp) \
 	@top_builddir@/src/inet/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/inet/libWeave_a-InetInterface.$(OBJEXT):  \
@@ -1505,6 +1526,9 @@ clean-libLIBRARIES:
 @top_builddir@/src/ble/libWeave_a-BleUUID.$(OBJEXT):  \
 	@top_builddir@/src/ble/$(am__dirstamp) \
 	@top_builddir@/src/ble/$(DEPDIR)/$(am__dirstamp)
+@top_builddir@/src/ble/libWeave_a-BleError.$(OBJEXT):  \
+	@top_builddir@/src/ble/$(am__dirstamp) \
+	@top_builddir@/src/ble/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/device-manager/$(am__dirstamp):
 	@$(MKDIR_P) @top_builddir@/src/device-manager
 	@: > @top_builddir@/src/device-manager/$(am__dirstamp)
@@ -1536,6 +1560,9 @@ clean-libLIBRARIES:
 	@top_builddir@/src/lib/core/$(am__dirstamp) \
 	@top_builddir@/src/lib/core/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/lib/core/libWeave_a-WeaveExchangeMgr.$(OBJEXT):  \
+	@top_builddir@/src/lib/core/$(am__dirstamp) \
+	@top_builddir@/src/lib/core/$(DEPDIR)/$(am__dirstamp)
+@top_builddir@/src/lib/core/libWeave_a-WeaveError.$(OBJEXT):  \
 	@top_builddir@/src/lib/core/$(am__dirstamp) \
 	@top_builddir@/src/lib/core/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/lib/core/libWeave_a-WeaveFabricState.$(OBJEXT):  \
@@ -1590,6 +1617,9 @@ clean-libLIBRARIES:
 	@$(MKDIR_P) @top_builddir@/src/lib/support/$(DEPDIR)
 	@: > @top_builddir@/src/lib/support/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/lib/support/libWeave_a-ASN1OID.$(OBJEXT):  \
+	@top_builddir@/src/lib/support/$(am__dirstamp) \
+	@top_builddir@/src/lib/support/$(DEPDIR)/$(am__dirstamp)
+@top_builddir@/src/lib/support/libWeave_a-ASN1Error.$(OBJEXT):  \
 	@top_builddir@/src/lib/support/$(am__dirstamp) \
 	@top_builddir@/src/lib/support/$(DEPDIR)/$(am__dirstamp)
 @top_builddir@/src/lib/support/libWeave_a-ASN1Reader.$(OBJEXT):  \
@@ -2140,6 +2170,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BLEEndPoint.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleLayer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleUUID.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/ble/$(DEPDIR)/libWeave_a-WoBle.Po@am__quote@
@@ -2149,7 +2180,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-EndPointBasis.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPAddress-StringFuncts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPAddress.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPPrefix.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetFaultInjection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetInterface.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetLayer.Po@am__quote@
@@ -2166,6 +2199,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveCircularTLVBuffer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveConnection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveConnectionTunnel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveExchangeMgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveFabricState.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveGlobals.Po@am__quote@
@@ -2265,6 +2299,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/profiles/weave-tunneling/$(DEPDIR)/libWeave_a-WeaveTunnelCommon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/profiles/weave-tunneling/$(DEPDIR)/libWeave_a-WeaveTunnelConnectionMgr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/profiles/weave-tunneling/$(DEPDIR)/libWeave_a-WeaveTunnelControl.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1OID.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Reader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@@top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Writer.Po@am__quote@
@@ -2513,6 +2548,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/inet/libWeave_a-IPAddress.obj `if test -f '@top_builddir@/src/inet/IPAddress.cpp'; then $(CYGPATH_W) '@top_builddir@/src/inet/IPAddress.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/inet/IPAddress.cpp'; fi`
 
+@top_builddir@/src/inet/libWeave_a-IPEndPointBasis.o: @top_builddir@/src/inet/IPEndPointBasis.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/inet/libWeave_a-IPEndPointBasis.o -MD -MP -MF @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Tpo -c -o @top_builddir@/src/inet/libWeave_a-IPEndPointBasis.o `test -f '@top_builddir@/src/inet/IPEndPointBasis.cpp' || echo '$(srcdir)/'`@top_builddir@/src/inet/IPEndPointBasis.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Tpo @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/inet/IPEndPointBasis.cpp' object='@top_builddir@/src/inet/libWeave_a-IPEndPointBasis.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/inet/libWeave_a-IPEndPointBasis.o `test -f '@top_builddir@/src/inet/IPEndPointBasis.cpp' || echo '$(srcdir)/'`@top_builddir@/src/inet/IPEndPointBasis.cpp
+
+@top_builddir@/src/inet/libWeave_a-IPEndPointBasis.obj: @top_builddir@/src/inet/IPEndPointBasis.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/inet/libWeave_a-IPEndPointBasis.obj -MD -MP -MF @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Tpo -c -o @top_builddir@/src/inet/libWeave_a-IPEndPointBasis.obj `if test -f '@top_builddir@/src/inet/IPEndPointBasis.cpp'; then $(CYGPATH_W) '@top_builddir@/src/inet/IPEndPointBasis.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/inet/IPEndPointBasis.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Tpo @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPEndPointBasis.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/inet/IPEndPointBasis.cpp' object='@top_builddir@/src/inet/libWeave_a-IPEndPointBasis.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/inet/libWeave_a-IPEndPointBasis.obj `if test -f '@top_builddir@/src/inet/IPEndPointBasis.cpp'; then $(CYGPATH_W) '@top_builddir@/src/inet/IPEndPointBasis.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/inet/IPEndPointBasis.cpp'; fi`
+
 @top_builddir@/src/inet/libWeave_a-IPPrefix.o: @top_builddir@/src/inet/IPPrefix.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/inet/libWeave_a-IPPrefix.o -MD -MP -MF @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPPrefix.Tpo -c -o @top_builddir@/src/inet/libWeave_a-IPPrefix.o `test -f '@top_builddir@/src/inet/IPPrefix.cpp' || echo '$(srcdir)/'`@top_builddir@/src/inet/IPPrefix.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPPrefix.Tpo @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-IPPrefix.Po
@@ -2526,6 +2575,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/inet/IPPrefix.cpp' object='@top_builddir@/src/inet/libWeave_a-IPPrefix.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/inet/libWeave_a-IPPrefix.obj `if test -f '@top_builddir@/src/inet/IPPrefix.cpp'; then $(CYGPATH_W) '@top_builddir@/src/inet/IPPrefix.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/inet/IPPrefix.cpp'; fi`
+
+@top_builddir@/src/inet/libWeave_a-InetError.o: @top_builddir@/src/inet/InetError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/inet/libWeave_a-InetError.o -MD -MP -MF @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Tpo -c -o @top_builddir@/src/inet/libWeave_a-InetError.o `test -f '@top_builddir@/src/inet/InetError.cpp' || echo '$(srcdir)/'`@top_builddir@/src/inet/InetError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Tpo @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/inet/InetError.cpp' object='@top_builddir@/src/inet/libWeave_a-InetError.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/inet/libWeave_a-InetError.o `test -f '@top_builddir@/src/inet/InetError.cpp' || echo '$(srcdir)/'`@top_builddir@/src/inet/InetError.cpp
+
+@top_builddir@/src/inet/libWeave_a-InetError.obj: @top_builddir@/src/inet/InetError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/inet/libWeave_a-InetError.obj -MD -MP -MF @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Tpo -c -o @top_builddir@/src/inet/libWeave_a-InetError.obj `if test -f '@top_builddir@/src/inet/InetError.cpp'; then $(CYGPATH_W) '@top_builddir@/src/inet/InetError.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/inet/InetError.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Tpo @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetError.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/inet/InetError.cpp' object='@top_builddir@/src/inet/libWeave_a-InetError.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/inet/libWeave_a-InetError.obj `if test -f '@top_builddir@/src/inet/InetError.cpp'; then $(CYGPATH_W) '@top_builddir@/src/inet/InetError.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/inet/InetError.cpp'; fi`
 
 @top_builddir@/src/inet/libWeave_a-InetInterface.o: @top_builddir@/src/inet/InetInterface.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/inet/libWeave_a-InetInterface.o -MD -MP -MF @top_builddir@/src/inet/$(DEPDIR)/libWeave_a-InetInterface.Tpo -c -o @top_builddir@/src/inet/libWeave_a-InetInterface.o `test -f '@top_builddir@/src/inet/InetInterface.cpp' || echo '$(srcdir)/'`@top_builddir@/src/inet/InetInterface.cpp
@@ -2751,6 +2814,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/ble/libWeave_a-BleUUID.obj `if test -f '@top_builddir@/src/ble/BleUUID.cpp'; then $(CYGPATH_W) '@top_builddir@/src/ble/BleUUID.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/ble/BleUUID.cpp'; fi`
 
+@top_builddir@/src/ble/libWeave_a-BleError.o: @top_builddir@/src/ble/BleError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/ble/libWeave_a-BleError.o -MD -MP -MF @top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Tpo -c -o @top_builddir@/src/ble/libWeave_a-BleError.o `test -f '@top_builddir@/src/ble/BleError.cpp' || echo '$(srcdir)/'`@top_builddir@/src/ble/BleError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Tpo @top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/ble/BleError.cpp' object='@top_builddir@/src/ble/libWeave_a-BleError.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/ble/libWeave_a-BleError.o `test -f '@top_builddir@/src/ble/BleError.cpp' || echo '$(srcdir)/'`@top_builddir@/src/ble/BleError.cpp
+
+@top_builddir@/src/ble/libWeave_a-BleError.obj: @top_builddir@/src/ble/BleError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/ble/libWeave_a-BleError.obj -MD -MP -MF @top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Tpo -c -o @top_builddir@/src/ble/libWeave_a-BleError.obj `if test -f '@top_builddir@/src/ble/BleError.cpp'; then $(CYGPATH_W) '@top_builddir@/src/ble/BleError.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/ble/BleError.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Tpo @top_builddir@/src/ble/$(DEPDIR)/libWeave_a-BleError.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/ble/BleError.cpp' object='@top_builddir@/src/ble/libWeave_a-BleError.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/ble/libWeave_a-BleError.obj `if test -f '@top_builddir@/src/ble/BleError.cpp'; then $(CYGPATH_W) '@top_builddir@/src/ble/BleError.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/ble/BleError.cpp'; fi`
+
 @top_builddir@/src/device-manager/libWeave_a-WoBleTest.o: @top_builddir@/src/device-manager/WoBleTest.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/device-manager/libWeave_a-WoBleTest.o -MD -MP -MF @top_builddir@/src/device-manager/$(DEPDIR)/libWeave_a-WoBleTest.Tpo -c -o @top_builddir@/src/device-manager/libWeave_a-WoBleTest.o `test -f '@top_builddir@/src/device-manager/WoBleTest.cpp' || echo '$(srcdir)/'`@top_builddir@/src/device-manager/WoBleTest.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/device-manager/$(DEPDIR)/libWeave_a-WoBleTest.Tpo @top_builddir@/src/device-manager/$(DEPDIR)/libWeave_a-WoBleTest.Po
@@ -2848,6 +2925,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/lib/core/WeaveExchangeMgr.cpp' object='@top_builddir@/src/lib/core/libWeave_a-WeaveExchangeMgr.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/lib/core/libWeave_a-WeaveExchangeMgr.obj `if test -f '@top_builddir@/src/lib/core/WeaveExchangeMgr.cpp'; then $(CYGPATH_W) '@top_builddir@/src/lib/core/WeaveExchangeMgr.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/lib/core/WeaveExchangeMgr.cpp'; fi`
+
+@top_builddir@/src/lib/core/libWeave_a-WeaveError.o: @top_builddir@/src/lib/core/WeaveError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/lib/core/libWeave_a-WeaveError.o -MD -MP -MF @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Tpo -c -o @top_builddir@/src/lib/core/libWeave_a-WeaveError.o `test -f '@top_builddir@/src/lib/core/WeaveError.cpp' || echo '$(srcdir)/'`@top_builddir@/src/lib/core/WeaveError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Tpo @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/lib/core/WeaveError.cpp' object='@top_builddir@/src/lib/core/libWeave_a-WeaveError.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/lib/core/libWeave_a-WeaveError.o `test -f '@top_builddir@/src/lib/core/WeaveError.cpp' || echo '$(srcdir)/'`@top_builddir@/src/lib/core/WeaveError.cpp
+
+@top_builddir@/src/lib/core/libWeave_a-WeaveError.obj: @top_builddir@/src/lib/core/WeaveError.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/lib/core/libWeave_a-WeaveError.obj -MD -MP -MF @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Tpo -c -o @top_builddir@/src/lib/core/libWeave_a-WeaveError.obj `if test -f '@top_builddir@/src/lib/core/WeaveError.cpp'; then $(CYGPATH_W) '@top_builddir@/src/lib/core/WeaveError.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/lib/core/WeaveError.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Tpo @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveError.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/lib/core/WeaveError.cpp' object='@top_builddir@/src/lib/core/libWeave_a-WeaveError.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/lib/core/libWeave_a-WeaveError.obj `if test -f '@top_builddir@/src/lib/core/WeaveError.cpp'; then $(CYGPATH_W) '@top_builddir@/src/lib/core/WeaveError.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/lib/core/WeaveError.cpp'; fi`
 
 @top_builddir@/src/lib/core/libWeave_a-WeaveFabricState.o: @top_builddir@/src/lib/core/WeaveFabricState.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/lib/core/libWeave_a-WeaveFabricState.o -MD -MP -MF @top_builddir@/src/lib/core/$(DEPDIR)/libWeave_a-WeaveFabricState.Tpo -c -o @top_builddir@/src/lib/core/libWeave_a-WeaveFabricState.o `test -f '@top_builddir@/src/lib/core/WeaveFabricState.cpp' || echo '$(srcdir)/'`@top_builddir@/src/lib/core/WeaveFabricState.cpp
@@ -3072,6 +3163,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/lib/support/ASN1OID.cpp' object='@top_builddir@/src/lib/support/libWeave_a-ASN1OID.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/lib/support/libWeave_a-ASN1OID.obj `if test -f '@top_builddir@/src/lib/support/ASN1OID.cpp'; then $(CYGPATH_W) '@top_builddir@/src/lib/support/ASN1OID.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/lib/support/ASN1OID.cpp'; fi`
+
+@top_builddir@/src/lib/support/libWeave_a-ASN1Error.o: @top_builddir@/src/lib/support/ASN1Error.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/lib/support/libWeave_a-ASN1Error.o -MD -MP -MF @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Tpo -c -o @top_builddir@/src/lib/support/libWeave_a-ASN1Error.o `test -f '@top_builddir@/src/lib/support/ASN1Error.cpp' || echo '$(srcdir)/'`@top_builddir@/src/lib/support/ASN1Error.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Tpo @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/lib/support/ASN1Error.cpp' object='@top_builddir@/src/lib/support/libWeave_a-ASN1Error.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/lib/support/libWeave_a-ASN1Error.o `test -f '@top_builddir@/src/lib/support/ASN1Error.cpp' || echo '$(srcdir)/'`@top_builddir@/src/lib/support/ASN1Error.cpp
+
+@top_builddir@/src/lib/support/libWeave_a-ASN1Error.obj: @top_builddir@/src/lib/support/ASN1Error.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/lib/support/libWeave_a-ASN1Error.obj -MD -MP -MF @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Tpo -c -o @top_builddir@/src/lib/support/libWeave_a-ASN1Error.obj `if test -f '@top_builddir@/src/lib/support/ASN1Error.cpp'; then $(CYGPATH_W) '@top_builddir@/src/lib/support/ASN1Error.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/lib/support/ASN1Error.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Tpo @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Error.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@top_builddir@/src/lib/support/ASN1Error.cpp' object='@top_builddir@/src/lib/support/libWeave_a-ASN1Error.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @top_builddir@/src/lib/support/libWeave_a-ASN1Error.obj `if test -f '@top_builddir@/src/lib/support/ASN1Error.cpp'; then $(CYGPATH_W) '@top_builddir@/src/lib/support/ASN1Error.cpp'; else $(CYGPATH_W) '$(srcdir)/@top_builddir@/src/lib/support/ASN1Error.cpp'; fi`
 
 @top_builddir@/src/lib/support/libWeave_a-ASN1Reader.o: @top_builddir@/src/lib/support/ASN1Reader.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWeave_a_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @top_builddir@/src/lib/support/libWeave_a-ASN1Reader.o -MD -MP -MF @top_builddir@/src/lib/support/$(DEPDIR)/libWeave_a-ASN1Reader.Tpo -c -o @top_builddir@/src/lib/support/libWeave_a-ASN1Reader.o `test -f '@top_builddir@/src/lib/support/ASN1Reader.cpp' || echo '$(srcdir)/'`@top_builddir@/src/lib/support/ASN1Reader.cpp

@@ -1,6 +1,6 @@
 #
+#    Copyright (c) 2018-2019 Google LLC
 #    Copyright (c) 2014-2018 Nest Labs, Inc.
-#    Copyright (c) 2018 Google LLC
 #    All rights reserved.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License");
@@ -119,6 +119,7 @@ noinst_HEADERS                                             = \
     TestDRBG.h                                               \
     TestEventLoggingSchemaExamples.h                         \
     TestGroupKeyStore.h                                      \
+    TestInetLayerCommon.hpp                                  \
     TestPersistedStorageImplementation.h                     \
     TestProfile.h                                            \
     TestWRMP.h                                               \
@@ -308,7 +309,6 @@ check_PROGRAMS                                 = \
     TestCrypto                                   \
     TestDRBG                                     \
     TestDeviceDescriptor                         \
-    TestDNSResolution                            \
     TestECDH                                     \
     TestECDSA                                    \
     TestECMath                                   \
@@ -331,6 +331,7 @@ check_PROGRAMS                                 = \
     TestProvHash                                 \
     TestRetainedPacketBuffer                     \
     TestSerialNumUtils                           \
+    TestSoftwareUpdate                           \
     TestSystemObject                             \
     TestSystemTimer                              \
     TestTAKE                                     \
@@ -342,11 +343,9 @@ check_PROGRAMS                                 = \
     TestWeaveFabricState                         \
     TestWeaveSignature                           \
     infratest                                    \
-    wsuptest                                     \
     TestErrorStr                                 \
     TestStatusReportStr                          \
     TestThermostatStatus                         \
-    TestWoble                                    \
     TestPairingCodeUtils                         \
     TestResourceIdentifier                       \
     $(NULL)
@@ -373,6 +372,13 @@ endif
 if WEAVE_WITH_OPENSSL
 check_PROGRAMS                                += \
     TestWeaveProvBundle                          \
+    $(NULL)
+endif
+
+if WEAVE_SYSTEM_CONFIG_USE_SOCKETS
+check_PROGRAMS                                += \
+    TestInetLayerDNS                            \
+    TestWoble                                    \
     $(NULL)
 endif
 
@@ -418,7 +424,6 @@ local_test_programs                            = \
     TestCrypto                                   \
     TestDRBG                                     \
     TestDeviceDescriptor                         \
-    TestDNSResolution                            \
     TestECDH                                     \
     TestECDSA                                    \
     TestECMath                                   \
@@ -438,6 +443,7 @@ local_test_programs                            = \
     TestProvHash                                 \
     TestRetainedPacketBuffer                     \
     TestSerialNumUtils                           \
+    TestSoftwareUpdate                           \
     TestSystemObject                             \
     TestSystemTimer                              \
     TestTAKE                                     \
@@ -453,7 +459,6 @@ local_test_programs                            = \
     TestErrorStr                                 \
     TestStatusReportStr                          \
     TestThermostatStatus                         \
-    TestWoble                                    \
     TestPairingCodeUtils                         \
     TestResourceIdentifier                       \
     $(NULL)
@@ -468,9 +473,9 @@ endif
 if WEAVE_BUILD_WARM
 local_test_programs                           += \
     TestWarm                                     \
-	TestPathStore                                \
-	TestWdmUpdateEncoder                         \
-	TestWdmUpdateResponse                        \
+    TestPathStore                                \
+    TestWdmUpdateEncoder                         \
+    TestWdmUpdateResponse                        \
     $(NULL)
 endif
 
@@ -484,6 +489,7 @@ network_test_programs                          = \
     TestBinding                                  \
     TestEventLogging                             \
     TestInetLayer                                \
+    TestInetLayerMulticast                       \
     TestPersistedCounter                         \
     TestPersistedStorage                         \
     TestRADaemon                                 \
@@ -494,7 +500,8 @@ network_test_programs                          = \
     TestWdmNext                                  \
     TestWdmOneWayCommandSender                   \
     TestWdmOneWayCommandReceiver                 \
-    TestDNSResolution                            \
+    TestInetLayerDNS                            \
+    TestWoble                                    \
     mock-device                                  \
     mock-weave-bg                                \
     weave-bdx-client-development                 \
@@ -506,14 +513,13 @@ network_test_programs                          = \
     weave-service-dir                            \
     weave-swu-client                             \
     weave-swu-server                             \
-    wsuptest                                     \
     $(NULL)
 
 if WEAVE_BUILD_LEGACY_WDM
-network_test_programs += \
+network_test_programs                         += \
     TestDataManagement                           \
     wdmtest                                      \
-	$(NULL)
+    $(NULL)
 endif
 
 
@@ -617,7 +623,7 @@ if WEAVE_RUN_HAPPY_PERF
 check_SCRIPTS                                 +=             \
     happy/tests/service/weave_service_perf_run.sh            \
     $(NULL)
-endif # WEAVE_RUN_HAPPY_SERVICE_PERF
+endif # WEAVE_RUN_HAPPY_PERF
 
 if WEAVE_RUN_HAPPY_WDM
 check_SCRIPTS                                 +=             \
@@ -1097,17 +1103,24 @@ check_SCRIPTS                                 +=                \
 endif # WEAVE_RUN_HAPPY_TIME
 
 if WEAVE_RUN_HAPPY_CORE
-check_SCRIPTS                                 +=                \
+check_SCRIPTS                                                           += \
     happy/tests/standalone/wdmv0/test_weave_wdmv0_01.py                    \
     happy/tests/standalone/swu/test_weave_swu_01.py                        \
     happy/tests/standalone/swu/test_weave_swu_02.py                        \
     happy/tests/standalone/messagelayer/test_weave_messagelayer_01.py      \
     happy/tests/standalone/dd/test_weave_dd_01.py                          \
-    happy/tests/standalone/inet/test_weave_inet_01.py                      \
     happy/tests/standalone/heartbeat/test_weave_heartbeat_01.py            \
     happy/tests/standalone/wrmp/test_weave_wrmp_01.py                      \
     $(NULL)
 endif # WEAVE_RUN_HAPPY_CORE
+
+if WEAVE_RUN_HAPPY_INET
+check_SCRIPTS                                                           += \
+    happy/tests/standalone/inet/test_inet_01.py                            \
+    happy/tests/standalone/inet/test_inet_dns_01.py                        \
+    happy/tests/standalone/inet/test_inet_multicast_01.py                  \
+    $(NULL)
+endif # WEAVE_RUN_HAPPY_INET
 
 endif # WEAVE_RUN_HAPPY_SERVICE
 endif # WEAVE_RUN_HAPPY
@@ -1255,9 +1268,17 @@ TestInetTimer_SOURCES                    = TestInetTimer.cpp
 TestInetTimer_LDFLAGS                    = $(AM_CPPFLAGS)
 TestInetTimer_LDADD                      = libWeaveTestCommon.a $(COMMON_LDADD)
 
-TestInetLayer_SOURCES                    = TestInetLayer.cpp
+TestInetLayer_SOURCES                    = TestInetLayer.cpp \
+                                           TestInetLayerCommon.cpp \
+                                           $(NULL)
 TestInetLayer_LDFLAGS                    = $(AM_CPPFLAGS)
 TestInetLayer_LDADD                      = libWeaveTestCommon.a $(COMMON_LDADD)
+
+TestInetLayerMulticast_SOURCES           = TestInetLayerMulticast.cpp \
+                                           TestInetLayerCommon.cpp \
+                                           $(NULL)
+TestInetLayerMulticast_LDFLAGS           = $(AM_CPPFLAGS)
+TestInetLayerMulticast_LDADD             = libWeaveTestCommon.a $(COMMON_LDADD)
 
 TestInetAddress_SOURCES                  = TestInetAddress.cpp
 TestInetAddress_LDADD                    = libWeaveTestCommon.a $(COMMON_LDADD)
@@ -1309,6 +1330,10 @@ TestRetainedPacketBuffer_LDADD           = libWeaveTestCommon.a $(COMMON_LDADD)
 
 TestSerialNumUtils_SOURCES               = TestSerialNumUtils.cpp
 TestSerialNumUtils_LDADD                 = $(COMMON_LDADD)
+
+TestSoftwareUpdate_SOURCES               = TestSoftwareUpdate.cpp
+TestSoftwareUpdate_LDFLAGS               = $(AM_CPPFLAGS)
+TestSoftwareUpdate_LDADD                 = $(COMMON_LDADD)
 
 TestSystemObject_SOURCES                 = TestSystemObject.cpp
 TestSystemObject_CPPFLAGS                = $(AM_CPPFLAGS) $(PTHREAD_CFLAGS)
@@ -1482,9 +1507,9 @@ TestPairingCodeUtils_LDADD               = $(COMMON_LDADD)
 TestResourceIdentifier_SOURCES           = TestResourceIdentifier.cpp
 TestResourceIdentifier_LDADD             = $(COMMON_LDADD) $(TEST_PLATFORM_LDADD)
 
-TestDNSResolution_SOURCES                = TestDNSResolution.cpp
-TestDNSResolution_LDFLAGS                = $(AM_CPPFLAGS)
-TestDNSResolution_LDADD                  = libWeaveTestCommon.a $(COMMON_LDADD)
+TestInetLayerDNS_SOURCES                = TestInetLayerDNS.cpp
+TestInetLayerDNS_LDFLAGS                = $(AM_CPPFLAGS)
+TestInetLayerDNS_LDADD                  = libWeaveTestCommon.a $(COMMON_LDADD)
 
 mock_device_CPPFLAGS                     = $(AM_CPPFLAGS) -I$(top_srcdir)/src/test-apps/schema
 mock_device_LDADD                        = libWeaveTestCommon.a $(COMMON_LDADD)
@@ -1567,9 +1592,6 @@ weave_swu_server_SOURCES                 = weave-swu-server.cpp  \
                                            MockSWUServer.cpp
 weave_swu_server_LDFLAGS                 = ${AM_CPPFLAGS}
 weave_swu_server_LDADD                   = libWeaveTestCommon.a $(COMMON_LDADD)
-
-wsuptest_SOURCES                         = wsuptest.cpp
-wsuptest_LDADD                           = $(COMMON_LDADD)
 
 if WEAVE_BUILD_COVERAGE
 CLEANFILES                               = $(wildcard *.gcda *.gcno)

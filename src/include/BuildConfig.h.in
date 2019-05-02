@@ -1,5 +1,11 @@
 /* src/include/BuildConfig.h.in.  Generated from configure.ac by autoheader.  */
 
+#ifndef WEAVE_BUILD_CONFIG_H
+#define WEAVE_BUILD_CONFIG_H
+
+/* Path to Weave BLE Layer platform config header file */
+#undef BLE_PROJECT_CONFIG_INCLUDE
+
 /* Define to 1 if you want to enable WoBle over bluez. */
 #undef CONFIG_BLE_PLATFORM_BLUEZ
 
@@ -27,9 +33,6 @@
 
 /* Define to 1 if your C++ compiler doesn't accept -c and -o together. */
 #undef CXX_NO_MINUS_C_MINUS_O
-
-/* Define to 1 if you have the <BleProjectConfig.h> header file. */
-#undef HAVE_BLEPROJECTCONFIG_H
 
 /* Define to 1 if the system has the type `clockid_t'. */
 #undef HAVE_CLOCKID_T
@@ -85,9 +88,6 @@
 /* Define to 1 if you have the <ifaddrs.h> header file. */
 #undef HAVE_IFADDRS_H
 
-/* Define to 1 if you have the <InetProjectConfig.h> header file. */
-#undef HAVE_INETPROJECTCONFIG_H
-
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
@@ -136,6 +136,9 @@
 /* Define to 1 if you have the <lwip/pbuf.h> header file. */
 #undef HAVE_LWIP_PBUF_H
 
+/* Define to 1 if LwIP has the raw_bind_netif() interface */
+#undef HAVE_LWIP_RAW_BIND_NETIF
+
 /* Define to 1 if you have the <lwip/raw.h> header file. */
 #undef HAVE_LWIP_RAW_H
 
@@ -153,6 +156,9 @@
 
 /* Define to 1 if you have the <lwip/tcp.h> header file. */
 #undef HAVE_LWIP_TCP_H
+
+/* Define to 1 if LwIP has the udp_bind_netif() interface */
+#undef HAVE_LWIP_UDP_BIND_NETIF
 
 /* Define to 1 if you have the <lwip/udp.h> header file. */
 #undef HAVE_LWIP_UDP_H
@@ -263,9 +269,6 @@
 /* Define to 1 if the system has the type `struct in6_rtmsg'. */
 #undef HAVE_STRUCT_IN6_RTMSG
 
-/* Define to 1 if you have the <SystemProjectConfig.h> header file. */
-#undef HAVE_SYSTEMPROJECTCONFIG_H
-
 /* Define to 1 if you have the <sys/socket.h> header file. */
 #undef HAVE_SYS_SOCKET_H
 
@@ -294,12 +297,6 @@
 /* Define to 1 if your libc exports vnsprintf_ex. */
 #undef HAVE_VSNPRINTF_EX
 
-/* Define to 1 if you have the <WarmProjectConfig.h> header file. */
-#undef HAVE_WARMPROJECTCONFIG_H
-
-/* Define to 1 if you have the <WeaveProjectConfig.h> header file. */
-#undef HAVE_WEAVEPROJECTCONFIG_H
-
 /* Define to 1 if the system has the type `_Bool'. */
 #undef HAVE__BOOL
 
@@ -327,6 +324,9 @@
 
 /* Weave target inet network endpoint(s) */
 #undef INET_ENDPOINTS
+
+/* Path to Weave Inet Layer platform config header file */
+#undef INET_PROJECT_CONFIG_INCLUDE
 
 /* Define to 1 if you want to use Weave with the inet dns resolver. */
 #undef INET_WANT_ENDPOINT_DNS
@@ -384,8 +384,14 @@
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
+/* Path to Weave System Layer platform config header file */
+#undef SYSTEM_PROJECT_CONFIG_INCLUDE
+
 /* Version number of package */
 #undef VERSION
+
+/* Path to WARM platform config header file */
+#undef WARM_PROJECT_CONFIG_INCLUDE
 
 /* Define to 1 to use the legacy WDM profile. */
 #undef WEAVE_CONFIG_LEGACY_WDM
@@ -429,6 +435,9 @@
 /* Define to 1 if you want to use Weave with a C Standard I/O Library-based
    logging system with timestamped log entries */
 #undef WEAVE_LOGGING_STYLE_STDIO_WITH_TIMESTAMPS
+
+/* Path to Weave Core platform config header file */
+#undef WEAVE_PROJECT_CONFIG_INCLUDE
 
 /* Define to 1 if you want to use LwIP with Weave System Layer. */
 #undef WEAVE_SYSTEM_CONFIG_USE_LWIP
@@ -498,3 +507,5 @@
 /* Define to the type of an unsigned integer type of width exactly 8 bits if
    such a type exists and the standard includes do not define it. */
 #undef uint8_t
+
+#endif // WEAVE_BUILD_CONFIG_H
